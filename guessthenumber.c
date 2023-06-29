@@ -4,17 +4,17 @@
 
 int main() {
 
-    FILE *record_file = fopen("record.txt", "r");
+    FILE *record_file = fopen("record.txt", "r"); // opening save file to read last record
     int last_record;
     fscanf(record_file, "%d", &last_record);
 
-    srand(time(0));
+    srand(time(0)); // changing the rand() seed for every game
 
     printf("I picked a number between 0-100. Try to guess it! Higest Score: %d\n", last_record);
     fclose(record_file);
 
-    int picked_num = rand() % 100;
-    int guess = 212;
+    int picked_num = rand() % 100; // maniplating rand() to get the number between 0-100
+    int guess = -1; // initial temporary guess
     int guess_count = 0;
 
     while (guess != picked_num)
@@ -34,19 +34,14 @@ int main() {
             if (guess_count < last_record)
             {
                 printf("NEW RECORD");
-                FILE *record_file = fopen("record.txt", "w");
+                FILE *record_file = fopen("record.txt", "w"); // opening save file to update/create(for first play) the record 
                 fprintf(record_file, "%d", guess_count);
                 fclose(record_file);
             }
             
             return EXIT_SUCCESS;
         }
-
-         
     }
     
-
-
-
     return EXIT_SUCCESS;
 }
